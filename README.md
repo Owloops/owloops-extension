@@ -9,4 +9,4 @@ This extension allows you to quickly export recordings from Chrome DevTools Reco
 
 Once installed, a new export option will appear in the Recorder panel labeled "Export as a Owloops Test script". Click that and download the exported code as a file.
 
-This extension relies on the [owloops-chrome-recorder](https://github.com/Owloops/owloops-chrome-recorder) library. Visit [its repo](https://github.com/owloops-io/owloops-chrome-recorder) for more information on export specifics.
+This extension relies on the [owloops-chrome-recorder](https://github.com/Owloops/owloops-chrome-recorder) library.
