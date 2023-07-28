@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Owloops Test Recorder</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap"
+      rel="stylesheet"
+    />
+    <script async type="module" src="./Replay.js"></script>
+    <style>
+      :root {
+        --primary-color: #5e81ac;
+        --primary-color-hover: #81a1c1;
+        --secondary-color: #2E3440;
+        --success-color: #28a745;
+        --error-color: #dc3545;
+        --text-color: #d8dee9;
+        --input-bg-color: rgba(255, 255, 255, 0.1);
+        --input-bg-color-focus: rgba(255, 255, 255, 0.2);
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      #notifications-container {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+      }
+
+      .notification {
+        position: relative;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 4px;
+        width: 200px;
+        color: white;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity 5s;
+      }
+
+      .success {
+        background-color: var(--success-color);
+      }
+
+      .error {
+        background-color: var(--error-color);
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--secondary-color);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        color: #d8dee9;
+      }
+
+      .container {
+        text-align: center;
+        margin: 1rem;
+        background-color: var(--secondary-color);
+        border-radius: 5px;
+        padding: 1rem;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(3.5px);
+        -webkit-backdrop-filter: blur(3.5px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      #settings-form input {
+        width: 90%;
+        padding: 0.5rem;
+        border: none;
+        margin-bottom: 1rem;
+        background: var(--input-bg-color);
+        color: var(--text-color);
+        border-radius: 15px;
+        outline: none;
+        transition: background 0.3s ease;
+      }
+
+      #settings-form input:focus {
+        background: var(--input-bg-color-focus);
+      }
+
+      #recording {
+        word-wrap: break-word;
+        text-align: left;
+        font-size: 0.9rem;
+      }
+
+      button {
+        background-color: var(--primary-color);
+        border: none;
+        color: #eceff4;
+        padding: 0.75rem 1.5rem;
+        text-align: center;
+        text-decoration: none;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin: 1rem 0;
+      }
+
+      button:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #81a1c1;
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      button:hover {
+        background-color: var(--primary-color-hover);
+      }
+
+      #actions-container button {
+        position: relative;
+        width: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #actions-container button {
+        position: relative;
+        width: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .loader {
+        border: 2px solid var(--secondary-color);
+        border-top: 2px solid #88c0d0;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        animation: spin 1s linear infinite;
+        display: none;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="notifications-container"></div>
+
+    <!-- Success notification template -->
+    <template id="success-template">
+      <div class="notification success">
+        <p></p>
+      </div>
+    </template>
+
+    <!-- Error notification template -->
+    <template id="error-template">
+      <div class="notification error">
+        <p></p>
+      </div>
+    </template>
+    <div class="container">
+      <img src="owloops.svg" alt="Owloops logo" style="width: 100px; margin-bottom: 1rem;"/>
+      <h1>Owloops Test Recorder</h1>
+      <p>Sync recordings as Owloops Birds and fly them</p>
+      <div id="settings-container" style="display: none">
+        <form id="settings-form">
+          <input
+            type="password"
+            id="api-token"
+            name="api-token"
+            placeholder="API Token"
+          />
+          <button type="submit">Save</button>
+          <button type="button" id="clear-token">Clear</button>
+        </form>
+      </div>
+      <button id="toggle-settings">Show Settings</button>
+      <div id="actions-container" style="display: none">
+        <button id="sync-only">
+          <div class="btn-content">
+            <span class="btn-text">Sync</span>
+            <div class="loader"></div>
+          </div>
+        </button>
+        <button id="replay-bird" style="display: none">Replay Bird</button>
+      </div>
+      <div id="recording"></div>
+    </div>
+  </body>
+</html>

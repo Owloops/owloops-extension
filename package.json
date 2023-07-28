@@ -1,6 +1,6 @@
 {
   "name": "owloops-recorder-extension",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "rollup": "^2.77.2"
+    "rollup": "^2.77.2",
+    "rollup-plugin-copy": "^3.4.0"
   }
 }
