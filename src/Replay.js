@@ -96,6 +96,17 @@ function fadeOutNotification(notificationElement) {
 }
 
 async function main() {
+  window.onload = function() {
+    document.getElementById('info-btn').addEventListener('click', function() {
+      const infoText = document.getElementById('info-text');
+      if (infoText.style.display === 'none') {
+        infoText.style.display = 'block';
+      } else {
+        infoText.style.display = 'none';
+      }
+    });
+  }
+  
   const token = localStorage.getItem("token");
 
   if (token) {

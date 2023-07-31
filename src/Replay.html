@@ -13,16 +13,12 @@
       :root {
         --primary-color: #5e81ac;
         --primary-color-hover: #81a1c1;
-        --secondary-color: #2E3440;
+        --secondary-color: #2e3440;
         --success-color: #28a745;
         --error-color: #dc3545;
         --text-color: #d8dee9;
         --input-bg-color: rgba(255, 255, 255, 0.1);
         --input-bg-color-focus: rgba(255, 255, 255, 0.2);
-      }
-
-      h1 {
-        font-size: 2rem;
       }
 
       #notifications-container {
@@ -79,8 +75,43 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: start;
+        overflow: auto;
+        max-height: 80vh;
+        max-width: 80vw;
+      }
+
+      .settings-button {
+        background-color: var(--primary-color);
+        border: none;
+        color: #eceff4;
+        padding: 0.5rem 1rem; /* Adjusted for smaller size */
+        text-align: center;
+        text-decoration: none;
+        display: inline-flex;
         justify-content: center;
-        padding: 2rem;
+        align-items: center;
+        font-size: 0.8rem; /* Adjusted for smaller size */
+        cursor: pointer;
+        border-radius: 20px; /* Adjusted for fully rounded corners */
+        transition: background-color 0.3s ease;
+        margin: 1rem 0;
+      }
+
+      .settings-input {
+        width: 85%;
+        padding: 0.5rem;
+        border: none;
+        margin-bottom: 1rem;
+        background: var(--input-bg-color);
+        color: var(--text-color);
+        border-radius: 15px;
+        outline: none;
+        transition: background 0.3s ease;
+      }
+
+      .settings-input:focus {
+        background: var(--input-bg-color-focus);
       }
 
       #settings-form input {
@@ -133,6 +164,28 @@
 
       button:hover {
         background-color: var(--primary-color-hover);
+      }
+
+      #sync-only {
+        background-color: #e5bc6a;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+
+      #sync-only:hover {
+        background-color: #ebcb8b;
+      }
+
+      #replay-bird {
+        background-color: #8fb073;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+
+      #replay-bird:hover {
+        background-color: #a3be8c;
       }
 
       #actions-container button {
@@ -190,22 +243,30 @@
       </div>
     </template>
     <div class="container">
-      <img src="owloops.svg" alt="Owloops logo" style="width: 100px; margin-bottom: 1rem;"/>
-      <h1>Owloops Test Recorder</h1>
-      <p>Sync recordings as Owloops Birds and fly them</p>
+      <img
+        src="owloops.svg"
+        alt="Owloops logo"
+        style="width: 150px; margin-bottom: 1rem"
+      />
+      <p>Sync recordings as Owloops Tests and replay them</p>
       <div id="settings-container" style="display: none">
         <form id="settings-form">
           <input
             type="password"
             id="api-token"
             name="api-token"
-            placeholder="API Token"
+            placeholder="API Key"
+            class="settings-input"
           />
-          <button type="submit">Save</button>
-          <button type="button" id="clear-token">Clear</button>
+          <button class="settings-button" type="submit">Save</button>
+          <button class="settings-button" type="button" id="clear-token">
+            Clear
+          </button>
         </form>
       </div>
-      <button id="toggle-settings">Show Settings</button>
+      <button class="settings-button" id="toggle-settings">
+        Show Settings
+      </button>
       <div id="actions-container" style="display: none">
         <button id="sync-only">
           <div class="btn-content">
@@ -213,9 +274,50 @@
             <div class="loader"></div>
           </div>
         </button>
-        <button id="replay-bird" style="display: none">Replay Bird</button>
+        <button id="replay-bird" style="display: none">Replay</button>
       </div>
       <div id="recording"></div>
+    </div>
+
+    <button
+      id="info-btn"
+      style="
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: #5e81ac;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      i
+    </button>
+
+    <div
+      id="info-text"
+      style="
+        display: none;
+        position: fixed;
+        bottom: 80px;
+        left: 70px;
+        max-width: 200px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        border-radius: 10px;
+      "
+    >
+      Use regular mode, not incognito.
     </div>
   </body>
 </html>
