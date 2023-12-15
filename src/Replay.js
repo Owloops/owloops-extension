@@ -27,8 +27,7 @@ function toggleSettings() {
 
 function saveToken() {
   const apiToken = document.querySelector('input[name="api-token"]').value;
-  const tokenFormat =
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  const tokenFormat = /^key-[0-9a-f]{64}$/i;
 
   if (apiToken && !apiToken.match(tokenFormat)) {
     // If the input doesn't match the format and is not empty, log an error and return early
@@ -149,28 +148,27 @@ async function syncRecording() {
   loader.style.display = "block"; // Changed from 'inline-block' to 'block'
 
   try {
-    const birdResponse = await fetch("https://api.owloops.link/bird/create", {
+    const birdResponse = await fetch("https://app.owloops.com/api/birds/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Apikey ${token}`,
+        Authorization: `Basic ${token}`,
       },
       body: JSON.stringify({
-        description: "",
         name: parsedRecording.title,
-        options: {},
-        skeleton: JSON.parse(owloopsRecording),
+        description: "",
+        owloops: JSON.parse(owloopsRecording),
       }),
     });
 
     const birdData = await birdResponse.json();
-    if (birdData.code === "LIMIT__BIRDS_LIMIT_EXCEEDED") {
+    if (birdData.message === "Bird creation limit reached for your plan.") {
       showNotification(
         "error",
         "You have reached the maximum number of birds."
       );
     } else {
-      const birdId = birdData.data.id;
+      const birdId = birdData.data[0].id;
       const url = `https://app.owloops.com/birds/${birdId}`;
 
       // Show the replay bird button and bind the click event
@@ -181,7 +179,6 @@ async function syncRecording() {
       });
       showNotification("success", "Recording synced successfully.");
     }
-    console.log(birdData);
   } catch (err) {
     showNotification("error", "Error syncing recording. Please try again.");
     console.error(err);
