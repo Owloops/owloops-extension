@@ -1,20 +1,26 @@
 import { owloopsStringifyChromeRecording } from '@owloops/chrome-recorder';
 
-const view = await chrome.devtools.recorder.createView(
-  /* name= */ 'Owloops Test',
-  /* pagePath= */ 'Replay.html'
-);
-
+let view;
 let latestRecording;
 
-view.onShown.addListener(() => {
-  // Recorder has shown the view. Send additional data to the view if needed.
-  chrome.runtime.sendMessage(JSON.stringify(latestRecording));
-});
+/* eslint-disable no-undef */
+if (chrome.devtools) {
+  (async () => {
+    view = await chrome.devtools.recorder.createView(
+      /* name= */ 'Owloops Test',
+      /* pagePath= */ 'Replay.html'
+    );
 
-view.onHidden.addListener(() => {
-  // Recorder has hidden the view.
-});
+    view.onShown.addListener(() => {
+      // Recorder has shown the view. Send additional data to the view if needed.
+      chrome.runtime.sendMessage(JSON.stringify(latestRecording));
+    });
+    
+    view.onHidden.addListener(() => {
+      // Recorder has hidden the view.
+    });
+  })();
+}
 
 export class RecorderPlugin {
   async stringify(recording) {
@@ -34,8 +40,10 @@ export class RecorderPlugin {
 }
 
 /* eslint-disable no-undef */
-chrome.devtools.recorder.registerRecorderExtensionPlugin(
-  new RecorderPlugin(),
-  /* name=*/ 'Owloops Test',
-  /* mediaType=*/ 'application/json'
-);
+if (chrome.devtools) {
+  chrome.devtools.recorder.registerRecorderExtensionPlugin(
+    new RecorderPlugin(),
+    /* name=*/ 'Owloops Test',
+    /* mediaType=*/ 'application/json'
+  );
+}

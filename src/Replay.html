@@ -215,6 +215,23 @@
         display: none;
       }
 
+      .api-key-instruction {
+        color: #d8dee9;
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .api-key-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .api-key-link:hover {
+        text-decoration: underline;
+        color: var(--primary-color-hover);
+      }
+
       @keyframes spin {
         0% {
           transform: rotate(0deg);
@@ -252,6 +269,15 @@
       <p>Sync recordings as Owloops Tests and replay them</p>
       <div id="settings-container" style="display: none">
         <form id="settings-form">
+          <p class="api-key-instruction">
+            Please enter your
+            <a
+              href="https://app.owloops.com/account/apikeys"
+              target="_blank"
+              class="api-key-link"
+              >Owloops API key</a
+            >
+          </p>
           <input
             type="password"
             id="api-token"
@@ -280,7 +306,7 @@
       <div id="recording"></div>
     </div>
 
-    <button
+    <!-- <button
       id="info-btn"
       style="
         position: fixed;
@@ -319,6 +345,6 @@
       "
     >
       This extension works in regular mode (not incognito)
-    </div>
+    </div> -->
   </body>
 </html>
