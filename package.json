@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Owloops/owloops-recorder-extension#readme",
   "dependencies": {
-    "@owloops/chrome-recorder": "^1.1.2"
+    "@owloops/chrome-recorder": "^1.1.4"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.3.0",

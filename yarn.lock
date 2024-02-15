@@ -49,10 +49,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owloops/chrome-recorder@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@owloops/chrome-recorder/-/chrome-recorder-1.1.2.tgz#d422c1a5e29176a76ee7906cd40ee17daf060133"
-  integrity sha512-9ycbwZfpXMb6EBL82QBAoCGo/bvgjX4T/VSF3QrONIFCbD0kpeYHbt0rebV6XT7LTlYoNNi63vMh+ZCEeRc5DQ==
+"@owloops/chrome-recorder@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@owloops/chrome-recorder/-/chrome-recorder-1.1.4.tgz#d6c911f26ef45cb777562826f5c1a15a90a13c7a"
+  integrity sha512-DTKloFlSmw6bpnOicX1W7fwV0lzPhyXTiHQR6rbi23Dg1aZoMWnszblrw8BurLC5wkaItobAi721c04Kqrstew==
   dependencies:
     "@puppeteer/replay" "^2.6.1"
     chalk "^5.0.1"
