@@ -1,3 +1,5 @@
+chrome.devtools.panels.create('Owloops', 'icon_32.png', 'panel.html');
+
 import { owloopsStringifyChromeRecording } from '@owloops/chrome-recorder';
 
 let view;
@@ -8,14 +10,14 @@ if (chrome.devtools) {
   (async () => {
     view = await chrome.devtools.recorder.createView(
       /* name= */ 'Owloops Test',
-      /* pagePath= */ 'Replay.html'
+      /* pagePath= */ 'replay.html'
     );
 
     view.onShown.addListener(() => {
       // Recorder has shown the view. Send additional data to the view if needed.
       chrome.runtime.sendMessage(JSON.stringify(latestRecording));
     });
-    
+
     view.onHidden.addListener(() => {
       // Recorder has hidden the view.
     });

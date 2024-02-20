@@ -1,5 +1,25 @@
-build
-node_modules
-.DS_Store
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-OwloopsChromeRecorderExtension.zip
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.history
+
+# secrets
+secrets.*.js
+
+yarn.lock
+package-lock.json
