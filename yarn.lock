@@ -2617,10 +2617,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@owloops/chrome-recorder@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@owloops/chrome-recorder/-/chrome-recorder-1.1.4.tgz#d6c911f26ef45cb777562826f5c1a15a90a13c7a"
-  integrity sha512-DTKloFlSmw6bpnOicX1W7fwV0lzPhyXTiHQR6rbi23Dg1aZoMWnszblrw8BurLC5wkaItobAi721c04Kqrstew==
+"@owloops/chrome-recorder@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@owloops/chrome-recorder/-/chrome-recorder-1.1.6.tgz#acc8100df5d31ae2c4f5a1e29aa122d2b9bccb0d"
+  integrity sha512-quYuRe2XlqI9D3vYhjvpD6HOpqS2HdEdW3O3YTdQqUUFaMwjPMKg2J4Aw5H0uef58YVeD4fIBkpyOxcnNGf3pQ==
   dependencies:
     "@puppeteer/replay" "^2.6.1"
     chalk "^5.0.1"
